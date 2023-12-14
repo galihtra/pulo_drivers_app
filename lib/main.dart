@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pulo_drivers_app/firebase_options.dart';
 import 'authentication/login_screen.dart';
+import 'pages/home_page.dart';
 
 
 Future<void> main() async
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: const LoginScreen(),
+      home: FirebaseAuth.instance.currentUser == null ? const LoginScreen() : const HomePage(),
     );
   }
 }
