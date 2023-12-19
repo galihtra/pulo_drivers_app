@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pulo_drivers_app/firebase_options.dart';
-import 'package:pulo_drivers_app/pushNotification/push_notification_system.dart';
 import 'authentication/login_screen.dart';
 import 'pages/home_page.dart';
 
@@ -17,15 +16,13 @@ Future<void> main() async {
     }
   });
 
-  // await Permission.notification.isDenied.then((valueOfPermission)
-  // {
-  //   if(valueOfPermission)
-  //   {
-  //     Permission.notification.request();
-  //   }
-  // });
-
-  await PushNotificationSystem().initNotification();
+  await Permission.notification.isDenied.then((valueOfPermission)
+  {
+    if(valueOfPermission)
+    {
+      Permission.notification.request();
+    }
+  });
 
   runApp(const MyApp());
 }

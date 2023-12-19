@@ -1,35 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class PushNotificationSystem
 {
   FirebaseMessaging firebaseCloudMessaging = FirebaseMessaging.instance;
-
-
-  Future<void> initNotification() async {
-    if (await isNotificationPermissionGranted()) {
-      final FCMToken = await firebaseCloudMessaging.getToken();
-      print('Token: $FCMToken');
-
-    } else {
-      // Izin notifikasi ditolak atau belum diberikan
-      print('Izin notifikasi ditolak atau belum diberikan');
-
-      // Meminta izin notifikasi
-      requestNotificationPermission();
-    }
-  }
-
-  Future<bool> isNotificationPermissionGranted() async {
-    final status = await Permission.notification.status;
-    return status == PermissionStatus.granted;
-  }
-
-  Future<void> requestNotificationPermission() async {
-    await Permission.notification.request();
-  }
 
   Future<String?> generateDeviceRegistrationToken() async
   {
