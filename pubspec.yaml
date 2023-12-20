@@ -43,6 +43,7 @@ dependencies:
   flutter_geofire: 
   firebase_messaging: ^14.7.9
   assets_audio_player: 
+  flutter_polyline_points: 
 
 dev_dependencies:
   flutter_lints: ^2.0.0
