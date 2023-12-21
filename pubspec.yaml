@@ -28,22 +28,23 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  assets_audio_player: null
   connectivity_plus: ^5.0.2
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.15.0
   firebase_core: ^2.24.0
   firebase_database: null
+  firebase_messaging: ^14.7.9
   firebase_storage: null
   flutter:
     sdk: flutter
+  flutter_geofire: null
+  flutter_polyline_points: null
   geolocator: ^10.1.0
   google_maps_flutter: ^2.5.0
   image_picker: ^1.0.4
   permission_handler: ^10.4.3
-  flutter_geofire: 
-  firebase_messaging: ^14.7.9
-  assets_audio_player: 
-  flutter_polyline_points: 
+  url_launcher: ^6.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
