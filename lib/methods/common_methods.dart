@@ -94,4 +94,33 @@ class CommonMethods
 
     return detailsModel;
   }
+
+
+  double calculateFareAmount(DirectionDetails directionDetails) {
+    // Tarif per kilometer setelah 1 km pertama
+    double perKmAmount = 3500;
+
+    // Tarif minimal
+    double minFareAmount = 10000;
+
+    // Jarak dalam kilometer
+    double distanceInKm = directionDetails.distanceValueDigits! / 1000;
+
+    // Biaya untuk 1 km pertama
+    double firstKmFare = 10000;
+
+    // Biaya untuk kilometer berikutnya setelah 1 km pertama
+    double additionalKmFare =
+        (distanceInKm > 1) ? (distanceInKm - 1) * perKmAmount : 0;
+
+    // Total biaya perjalanan
+    double totalFareAmount = firstKmFare + additionalKmFare;
+
+    // total biaya tidak kurang dari tarif minimal
+    totalFareAmount =
+        (totalFareAmount < minFareAmount) ? minFareAmount : totalFareAmount;
+
+    return totalFareAmount;
+  }
+
 }
