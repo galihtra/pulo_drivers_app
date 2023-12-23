@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pulo_drivers_app/firebase_options.dart';
+import 'package:pulo_drivers_app/pages/dashboard.dart';
 import 'authentication/login_screen.dart';
-import 'pages/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       home: FirebaseAuth.instance.currentUser == null
           ? const LoginScreen()
-          : const HomePage(),
+          : const Dashboard(),
     );
   }
 }
