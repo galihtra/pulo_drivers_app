@@ -1,25 +1,30 @@
+import 'package:intl/intl.dart';
 import 'package:pulo_drivers_app/methods/common_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:restart_app/restart_app.dart';
 
-class PaymentDialog extends StatefulWidget
-{
+class PaymentDialog extends StatefulWidget {
   String fareAmount;
 
-  PaymentDialog({super.key, required this.fareAmount,});
+  PaymentDialog({
+    super.key,
+    required this.fareAmount,
+  });
 
   @override
   State<PaymentDialog> createState() => _PaymentDialogState();
 }
 
-
-
-class _PaymentDialogState extends State<PaymentDialog>
-{
+class _PaymentDialogState extends State<PaymentDialog> {
   CommonMethods cMethods = CommonMethods();
 
   @override
   Widget build(BuildContext context) {
+    final NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'en_US', symbol: '\$');
+    final NumberFormat currencyFormatterIDR =
+        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -29,59 +34,58 @@ class _PaymentDialogState extends State<PaymentDialog>
         margin: const EdgeInsets.all(5.0),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.black87,
-            borderRadius: BorderRadius.circular(6),
+          color: Colors.black87,
+          borderRadius: BorderRadius.circular(6),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-
-            const SizedBox(height: 21,),
-
+            const SizedBox(
+              height: 21,
+            ),
             const Text(
               "COLLECT CASH",
               style: TextStyle(
                 color: Colors.grey,
               ),
             ),
-
-            const SizedBox(height: 21,),
-
+            const SizedBox(
+              height: 21,
+            ),
             const Divider(
               height: 1.5,
               color: Colors.white70,
               thickness: 1.0,
             ),
-
-            const SizedBox(height: 16,),
-
+            const SizedBox(
+              height: 16,
+            ),
             Text(
-              "\$" + widget.fareAmount,
+              currencyFormatterIDR.format(double.parse(widget.fareAmount)),
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-            const SizedBox(height: 16,),
-
+            const SizedBox(
+              height: 16,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "This is fare amount ( \$ ${widget.fareAmount} ) to be charged from the user.",
+                "This is fare amount (${currencyFormatterIDR.format(double.parse(widget.fareAmount))}) to be charged from the user.",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.grey
+                  color: Colors.grey,
                 ),
               ),
             ),
-
-            const SizedBox(height: 31,),
-
+            const SizedBox(
+              height: 31,
+            ),
             ElevatedButton(
-              onPressed: ()
-              {
+              onPressed: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
 
@@ -96,9 +100,9 @@ class _PaymentDialogState extends State<PaymentDialog>
                 "COLLECT CASH",
               ),
             ),
-
-            const SizedBox(height: 41,)
-
+            const SizedBox(
+              height: 41,
+            )
           ],
         ),
       ),

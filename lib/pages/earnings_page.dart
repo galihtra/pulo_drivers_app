@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 class EarningsPage extends StatefulWidget {
   const EarningsPage({super.key});
@@ -9,22 +11,21 @@ class EarningsPage extends StatefulWidget {
   State<EarningsPage> createState() => _EarningsPageState();
 }
 
-class _EarningsPageState extends State<EarningsPage>
-{
+class _EarningsPageState extends State<EarningsPage> {
   String driverEarnings = "";
 
-  getTotalEarningsOfCurrentDriver() async
-  {
-    DatabaseReference driversRef = FirebaseDatabase.instance.ref().child("drivers");
+  getTotalEarningsOfCurrentDriver() async {
+    DatabaseReference driversRef =
+        FirebaseDatabase.instance.ref().child("drivers");
 
-    await driversRef.child(FirebaseAuth.instance.currentUser!.uid)
+    await driversRef
+        .child(FirebaseAuth.instance.currentUser!.uid)
         .once()
-        .then((snap)
-    {
-      if((snap.snapshot.value as Map)["earnings"] != null)
-      {
+        .then((snap) {
+      if ((snap.snapshot.value as Map)["earnings"] != null) {
         setState(() {
-          driverEarnings = ((snap.snapshot.value as Map)["earnings"]).toString();
+          driverEarnings =
+              ((snap.snapshot.value as Map)["earnings"]).toString();
         });
       }
     });
@@ -44,7 +45,6 @@ class _EarningsPageState extends State<EarningsPage>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           Center(
             child: Container(
               color: Colors.indigo,
@@ -53,35 +53,34 @@ class _EarningsPageState extends State<EarningsPage>
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
                   children: [
-
-                    Image.asset("assets/images/totalearnings.png", width: 120,),
-
+                    Image.asset(
+                      "assets/images/totalearnings.png",
+                      width: 120,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-
                     const Text(
                       "Total Earnings:",
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
-
                     Text(
-                      "\$ " + driverEarnings,
+                      (driverEarnings.isNotEmpty)
+                          ? "Rp ${NumberFormat('#,##0', 'id_ID').format(double.parse(driverEarnings))}"
+                          : "",
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
+                        fontSize: 18,
+                        color: Colors.greenAccent,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
           ),
-
         ],
       ),
     );
